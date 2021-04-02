@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Books updateBook(Books books) {
+    public int updateBook(Books books) {
         return bookMapper.updateBook(books);
     }
 

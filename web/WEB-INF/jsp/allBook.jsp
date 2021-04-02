@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="row col-sm-4">
-        <a href="">添加书籍</a>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/toAddBook">添加书籍</a>
     </div>
     <div class="row text-center">
         <div class="col-sm-12 column">
@@ -42,6 +42,7 @@
                     <th class="text-center">书籍名称</th>
                     <th class="text-center">书籍数量</th>
                     <th class="text-center">书籍详情</th>
+                    <th class="text-center">操作</th>
                 </tr>
                 </thead>
                 <%--书籍从数据库中查询出来,从list中遍历出来--%>
@@ -52,6 +53,12 @@
                             <td>${book.bookName}</td>
                             <td>${book.bookCounts}</td>
                             <td>${book.detail}</td>
+                            <td>
+                                <a class="btn btn-info" href="${pageContext.request.contextPath}/book/toUpdateBook?id=${book.bookID}">
+                                    修改
+                                </a>
+                                <a class="btn btn-danger" href="${pageContext.request.contextPath}/book/deleteBook?id=${book.bookID}">删除</a>
+                            </td>
                         </tr>
                     </c:forEach>
                 </tbody>
