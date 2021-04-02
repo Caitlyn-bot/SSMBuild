@@ -30,8 +30,20 @@
             </div>
         </div>
     </div>
+    <%--添加书籍--%>
     <div class="row col-sm-4">
         <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/toAddBook">添加书籍</a>
+    </div>
+    <%--查询书籍--%>
+    <div class="row col-sm-4">
+        <form action="${pageContext.request.contextPath}/book/queryBook" class="form-inline" method="post" >
+            <input type="text" name="queryBookName" class="form-control" placeholder="请输入要查询的书籍">
+            <input type="submit" value="查询" class="btn btn-primary">
+        </form>
+    </div>
+    <%--显示全部书籍--%>
+    <div class="row col-sm-4">
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/book/allBook">显示全部书籍</a>
     </div>
     <div class="row text-center">
         <div class="col-sm-12 column">

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.zzw.domain.Books;
 import org.zzw.service.BookService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -65,6 +66,13 @@ public class BookController {
             System.out.println("删除成功");
         }
         return "redirect:/book/allBook";
+    }
+    //查询书籍
+    @RequestMapping("/queryBook")
+    public String queryBook(String queryBookName,Model model){
+        List<Books> books = bookService.queryBookByName(queryBookName);
+        model.addAttribute("list",books);
+        return "allBook";
     }
 
 }

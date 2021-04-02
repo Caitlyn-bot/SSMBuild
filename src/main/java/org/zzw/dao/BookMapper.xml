@@ -24,4 +24,9 @@
         select *
         from ssmbuild.books;
     </select>
+    <select id="queryBookByName"  resultType="Books">
+        select *
+        from  ssmbuild.books
+        where bookName like   CONCAT(CONCAT('%', #{bookName}), '%');
+    </select>
 </mapper>
