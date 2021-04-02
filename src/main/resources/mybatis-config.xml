@@ -9,8 +9,6 @@
     </typeAliases>
     <!--绑定mappers-->
     <mappers>
-        <mapper class="org.zzw.dao.BookMapper">
-
-        </mapper>
+        <mapper resource="org/zzw/dao/BookMapper.xml"/>
     </mappers>
 </configuration>
