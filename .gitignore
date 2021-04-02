@@ -73,10 +73,8 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 .gitignore
-src/main/java/org/zzw/controller/
-src/test/
+
 target/classes/
-web/WEB-INF/jsp/
 .idea/artifacts/
 .idea/codeStyles/
 .idea/compiler.xml
