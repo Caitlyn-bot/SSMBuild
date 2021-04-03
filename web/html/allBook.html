@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍展示页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/jquery-3.5.1.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function loadAllBook() {
+            var pathArray = window.location.pathname.split('/');
+            var secondLevelLocation = pathArray[1];
+            var Url = window.location.protocol + "//"+ window.location.host + "/"+ secondLevelLocation;
+            $.post({
+
+                url:"../ajax/allBook",
+                data:{},
+                dataType:"json",
+                success:function (data) {
+                    $("#bookTableBody").empty();
+                    //alert(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var $option =$(
+                            "<tr>"
+                            +"<td>"
+                            +data[i].bookID
+                            +"</td>"
+                            +"<td>"
+                            +data[i].bookName
+                            +"</td>"
+                            +"<td>"
+                            +data[i].bookCounts
+                            +"</td>"
+                            +"<td>"
+                            +data[i].detail
+                            +"</td>"
+                            +"<td>"
+                            +"<a class=\"btn btn-info\" href=\"../html/updateBook.html?id="+data[i].bookID+"\">"
+                            +"修改"
+                            +"</a>"
+                            +"<a class=\"btn btn-danger\" href=\"../ajax/deleteBook?id="+data[i].bookID+"\">"
+                            +"删除"
+                            +"</a>"
+                            +"</td>"
+                            +"</tr>"
+                        );
+                        $("#bookTableBody").append($option);
+                    }
+                }
+            });
+        }
+        //页面加载事件
+        $().ready(loadAllBook()
+            );
+    </script>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row clearfix text-center">
+        <div class="col-sm-12 column">
+            <div class="page-header">
+                <h1>
+                    <small>书籍列表——————显示所有书籍</small>
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row col-sm-4">
+    <a class="btn btn-primary" href="../html/addBook.html">添加书籍</a>
+</div>
+<div class="row col-sm-4">
+        <form class="form-inline">
+        <input type="text" name="queryBookName" id="queryBookName" class="form-control " placeholder="请输入要查询的书籍">
+        <input type="button" value="查询" onclick="queryBook()" class="btn btn-primary ">
+        </form>
+        <script>
+            function queryBook() {
+                var pathArray = window.location.pathname.split('/');
+                var secondLevelLocation = pathArray[1];
+                var Url = window.location.protocol + "//"+ window.location.host + "/"+ secondLevelLocation;
+                $.post({
+
+                    url:"../ajax/queryBook",
+                    data:{queryBookName:$("#queryBookName").val()},
+                    dataType:"json",
+                    success:function (data) {
+                        $("#bookTableBody").empty();
+                        //alert(data);
+                        for (var i = 0; i < data.length; i++) {
+                            var $option =$(
+                                "<tr>"
+                                +"<td>"
+                                +data[i].bookID
+                                +"</td>"
+                                +"<td>"
+                                +data[i].bookName
+                                +"</td>"
+                                +"<td>"
+                                +data[i].bookCounts
+                                +"</td>"
+                                +"<td>"
+                                +data[i].detail
+                                +"</td>"
+                                +"<td>"
+                                +"<a class=\"btn btn-info\" href=\"../html/updateBook.html?id="+data[i].bookID+"\">"
+                                +"修改"
+                                +"</a>"
+                                +"<a class=\"btn btn-danger\" href=\"../ajax/deleteBook?id="+data[i].bookID+"\">"
+                                +"删除"
+                                +"</a>"
+                                +"</td>"
+                                +"</tr>"
+                            );
+                            $("#bookTableBody").append($option);
+                        }
+                    }
+                });
+            }
+        </script>
+</div>
+
+<div class="row col-sm-4">
+    <btn class="btn btn-primary"  onclick="loadAllBook()">显示全部书籍</btn>
+
+</div>
+<div class="row text-center">
+    <div class="col-sm-12 column">
+        <table class="table table-bordered table-hover table-striped" id="bookTable">
+            <thead>
+            <tr >
+                <th class="text-center">书籍编号</th>
+                <th class="text-center">书籍名称</th>
+                <th class="text-center">书籍数量</th>
+                <th class="text-center">书籍详情</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody class="text-center" id="bookTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

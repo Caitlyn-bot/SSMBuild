@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改书籍</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/jquery-3.5.1.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function loadBook(){
+            $.getUrlParam = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+            var id = $.getUrlParam('id');
+            var pathArray = window.location.pathname.split('/');
+            var secondLevelLocation = pathArray[1];
+            var Url = window.location.protocol + "//"+ window.location.host + "/"+ secondLevelLocation;
+            $.post({
+
+                url:"../ajax/toUpdateBook",
+                data:{id:id},
+                dataType:"json",
+                success:function (data) {
+                    $("#bookID").val(data.bookID);
+                    $("#bookName").val(data.bookName);
+                    $("#bookNum").val(data.bookCounts);
+                    $("#detail").val(data.detail);
+                }
+            });
+        }
+        //页面加载事件
+        $().ready(loadBook()
+        );
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix text-center">
+        <div class="col-sm-12 column">
+            <div class="page-header">
+                <h1>
+                    <small>修改书籍</small>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <form action="../ajax/updateBook" method="post">
+        <input type="hidden" name="bookID" id="bookID">
+        <div class="form-group">
+            <label for="bookName">书籍名称</label>
+            <input type="text" name="bookName" class="form-control"  id="bookName" required>
+        </div>
+        <div class="form-group">
+            <label for="bookNum">书籍数量</label>
+            <input type="text" name="bookCounts" class="form-control"  id="bookNum" required>
+        </div>
+        <div class="form-group">
+            <label for="detail">书籍详情</label>
+            <input type="text" name="detail" class="form-control"  id="detail" required>
+        </div>
+        <button type="submit" class="btn btn-default form-control">修改</button>
+    </form>
+</div>
+</body>
+</html>
